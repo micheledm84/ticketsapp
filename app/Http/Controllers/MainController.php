@@ -14,14 +14,5 @@ class MainController extends Controller
 
         return view('main')->with(['devs'=>json_encode($devs)]);
 
-        /*$projects = Project::all();
-
-        $tasks = Task::all();
-
-        $tasks_users = TaskUserResource::collection(TaskUser::all());*/
-
-        //$users = UserResource::collection(User::all()); 
-
-        /*return view('home')->with(['task_user'=>json_encode($tasks_users), 'tasks'=>$tasks, 'projects'=>$projects, 'users'=>json_encode($users)]);*/
     }
 }

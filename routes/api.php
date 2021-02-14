@@ -19,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::post('store_task_user', 'Api\TaskUserController@store')->name('store_task_user');
+
+Route::delete('remove_task_user', 'Api\TaskUserController@remove')->name('remove_task_user');
+
+Route::delete('get_task_user', 'Api\TaskUserController@index')->name('index_task_user');

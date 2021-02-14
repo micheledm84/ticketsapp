@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Team extends Model
 {
     use SoftDeletes;
+
+    public function users()
+    {
+        return $this->hasMany('App\User');
+    }
 }

@@ -12,7 +12,13 @@
 
 <script>
     export default {
-        props: ['errorsForm'],
+        props: {
+            errorsForm: {
+                type: Object,
+                required: true,
+                default: () => {},
+            }
+        },
         mounted() {
             console.log('Component mounted.');
         },

@@ -1,60 +1,61 @@
 <template>
-    <div>
-        <select required v-model="user.devs" class="form-control" id="devs">
-            <option v-for="dev in devs" :value="dev.id" :key="dev.id">
-                {{ dev.name }}
-            </option>
-        </select>
-        <button type="button" class="btn btn-primary" @click="assignTask()">Assign Task</button>
-        <button type="button" class="btn btn-primary">Remove Task</button>
-        <button type="button" class="btn btn-primary">Show In Progress Tasks</button>
-        <button type="button" class="btn btn-primary">Show Cross-Team Projects</button>
-        <button type="button" class="btn btn-primary">Show PM</button>
-    </div>
-    <!--<form method="POST">
-        <div class="form-group">
-            <label for="pm">PM:</label>
-            <select required v-model="user.pms" class="form-control" id="pm">
-                <option v-for="pm in pms" :value="pm.id" :key="pm.id">
-                    {{ pm.name }}
-                </option>
-            </select>
+    <div class="container">
+        <div>
+            <title-form v-model="titleForm" :titleMessage="titleForm"></title-form>
         </div>
-        <div class="form-group">
-            <label for="devs">Developer:</label>
-            <select required v-model="user.devs" multiple class="form-control" id="devs">
-                <option v-for="dev in devs" :value="dev.id" :key="dev.id">
+        <hr>
+        <div>
+            <label for="devs" class="mt-3">Select a dev:</label>
+        </div>
+        <div>
+            <select required v-model="user.devs" class="form-control" id="devs" @change="onChangeDev($event)">
+                <option v-for="dev in devs" :value="dev.id" :key="dev.name">
                     {{ dev.name }}
                 </option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input required type="text" class="form-control" id="name" maxlength="50">
+        <hr>
+        <div>
+            <label for="devs">Assign a task to {{ selectedDev }}:</label>
         </div>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea required class="form-control" id="description"></textarea>
+        <div>
+            <button type="button" class="btn btn-primary" @click="assignTask()">Assign Task</button>
         </div>
-        <div class="form-group">
-            <label for="projects">Project:</label>
-            <select required v-model="user.projects" class="form-control" id="projects">
-                <option v-for="project in projects" :value="project.id" :key="project.id">
-                    {{ project.name }}
-                </option>
-            </select>
+        <div>
+            <label for="devs"  class="mt-3">Remove a task from {{ selectedDev }}:</label>
         </div>
-        <div class="form-group">
-            <label for="deadline">Deadline:</label>
-            <input required type="date" class="form-control" id="deadline">
+        <div>
+            <button type="button" class="btn btn-primary" @click="removeTask()">Remove Task</button>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>-->
+        <div>
+            <label for="devs"  class="mt-3">Show in progress task assigned to {{ selectedDev }}:</label>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" @click="showTasksInProgress()">Show In Progress Tasks</button>
+        </div>
+        <div>
+            <label for="devs" class="mt-3">Show all cross-team projects (no need to select a dev):</label>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary"  @click="showCrossTeamProjects()">Show Cross-Team Projects</button>
+        </div>
+        <div>
+            <label for="devs" class="mt-3">Show the PM of {{ selectedDev }}:</label>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary"  @click="showPM()">Show PM</button>
+        </div>
+    </div>
 </template>
 
 <script>
+    import TitleForm from "./TitleForm.vue"
+
     export default {
+
         components: {
+            'title-form': TitleForm
+
         },
         mounted() {
             console.log('Component mounted.');
@@ -64,37 +65,56 @@
                 type: Array,
                 required: true,
                 default: () => [],
-            }/*,
-            pms: {
-                type: Array,
-                required: true,
-                default: () => [],
-            },
-            devs: {
-                type: Array,
-                required: true,
-                default: () => [],
-            },
-            users: {
-                type: Array,
-                required: true,
-                default: () => [],
-            }*/
+            }
+        },
+        computed: {
+            
         },
         data: function() {
             return {
+                titleForm: "Welcome to Ticketsapp",
+                selectedDev: "the selected dev",
                 user: {
-                    //pms: "",
                     devs: "",
-                    //projects: ""
                 }
-                //selectOperations: 0
             }
         },
         methods: {
+            showCrossTeamProjects() {
+                window.location.href = "crossteam";
+            },
             assignTask() {
-                alert(this.user.devs);
-                window.location.href = "allocate/" + this.user.devs;
+                if(this.user.devs !== "") {
+                    window.location.href = "allocate/" + this.user.devs;
+                } else {
+                    alert("Select a dev");
+                }
+            },
+            showTasksInProgress() {
+                if(this.user.devs !== "") {
+                    window.location.href = "inprogress/" + this.user.devs;
+                } else {
+                    alert("Select a dev");
+                }
+            },
+            showPM() {
+                if(this.user.devs !== "") {
+                    window.location.href = "pm/" + this.user.devs;
+                } else {
+                    alert("Select a dev");
+                }
+            },
+            removeTask() {
+                if(this.user.devs !== "") {
+                    window.location.href = "remove/" + this.user.devs;
+                } else {
+                    alert("Select a dev");
+                }
+            },
+            onChangeDev(e) {
+                const selectedDevId = e.target.value;
+                const name = this.devs.filter((dev) => dev.id == selectedDevId)[0].name;
+                this.selectedDev = name;
             }
         }
     }

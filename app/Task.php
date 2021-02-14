@@ -17,6 +17,16 @@ class Task extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User')->withTimestamps();
+        return $this->belongsToMany('App\User')->withPivot('user_id', 'task_id')->withTimestamps();
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Project');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('App\Status');
     }
 }

@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Status extends Model
 {
     use SoftDeletes;
+
+    protected $table = 'status';
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
 }

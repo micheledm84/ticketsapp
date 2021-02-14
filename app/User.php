@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Task')->withTimestamps();
     }
+
+    public function projects()
+    {
+        return $this->hasMany('App\Project');
+    }
+
+    public function team()
+    {
+        return $this->belongsTo('App\Team');
+    }
 }

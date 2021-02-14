@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use App\TaskUser;
+use App\User;
 
 use Illuminate\Contracts\Validation\Rule;
 

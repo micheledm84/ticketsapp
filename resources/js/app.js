@@ -31,6 +31,11 @@ Vue.component('allocate-task', require('./components/AllocateTask.vue').default)
 Vue.component('validated-errors', require('./components/ValidatedErrors.vue').default);
 Vue.component('success-alert', require('./components/SuccessAlert.vue').default);
 Vue.component('the-reporter-tickets', require('./components/TheReporterTickets.vue').default);
+Vue.component('title-form', require('./components/TitleForm.vue').default);
+Vue.component('in-progress-table', require('./components/InProgressTable.vue').default);
+Vue.component('cross-team-table', require('./components/CrossTeamTable.vue').default);
+Vue.component('redirect-button', require('./components/RedirectButton.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

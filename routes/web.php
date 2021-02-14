@@ -20,3 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'MainController@index')->name('main');
 
 Route::get('/allocate/{id}', 'AllocateController@index')->name('allocate');
+
+Route::get('/remove/{id}', 'RemoveController@index')->name('remove');
+
+Route::get('/inprogress/{id}', 'InProgressController@index')->name('in_progress');
+
+Route::get('/crossteam', 'CrossTeamController@index')->name('cross_team');
+
+Route::get('/pm/{id}', 'PMController@index')->name('pm');

@@ -4,9 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\User;
-
-class UserResource extends JsonResource
+class TaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,10 +17,12 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'role_id' => $this->role_id,
-            'badge_id' => $this->badge_id,
-            'team_id' => $this->team_id,
-            'pm_name' => User::where('team_id', $this->team_id)->where('role_id', 2)->pluck('name')->first(),
+            'description' => $this->description,
+            'deadline' => $this->deadline,
+            'status' => $this->status->name,
+            'project' => $this->project->name,
+            'user' => $this->project->user->name,
+            'created_at' => $this->created_at->format('Y-m-d'),
         ];
     }
 }

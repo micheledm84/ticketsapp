@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="alert alert-success">{{ success_message }}</div>
+        <h5 class="font-weight-bold">{{ titleMessage }}</h5>
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            success_message: {
+            titleMessage: {
                 type: String,
                 required: true,
                 default: () => '',
