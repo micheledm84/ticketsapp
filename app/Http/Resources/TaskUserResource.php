@@ -19,11 +19,13 @@ class TaskUserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'task_id' => $this->task_id,
-            'user_id' => $this->user_id,
-            'task_name' => $this->task->name,
-            'task_description' => $this->task->description,
-            'user_name' => $this->user->name,
+            'name' => $this->name,
+            'description' => $this->description,
+            'status' => $this->task->status->name, 
+            'project' => $this->task->project->name,
+            'created_at' => $this->created_at->format('Y-m-d'),  
+            'deadline' => $this->deadline,
+            'pm' => $this->task->project->user->name,
         ];
     }
 }

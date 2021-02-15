@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Badge extends Model
 {
     use SoftDeletes;
+
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
 }

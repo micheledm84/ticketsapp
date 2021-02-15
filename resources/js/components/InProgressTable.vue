@@ -26,7 +26,7 @@
                         <td>{{ task.description }}</td>
                         <td>{{ task.status }}</td>
                         <td>{{ task.project }}</td>
-                        <td>{{ task.user }}</td>
+                        <td>{{ task.pm }}</td>
                         <td>{{ task.created_at }}</td>
                         <td>{{ task.deadline }}</td>
                     </tr>
@@ -49,6 +49,7 @@
         },
         mounted() {
             console.log('Component mounted.');
+            console.log(this.tasks);
         },
         props: {
             dev: {

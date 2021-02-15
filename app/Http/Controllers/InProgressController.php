@@ -6,17 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Task;
 use App\User;
+use App\TaskUser;
 
-use App\Http\Resources\TaskResource;
+use App\Http\Resources\TaskUserResource;
 
 class InProgressController extends Controller
 {
     public function index($id)
     {
+        $tasks = TaskUser::join('tasks', 'task_user.task_id', 'tasks.id')
+            ->where('task_user.user_id', $id)
+            ->where('tasks.status_id', 2)
+            ->get();
 
-        $user_tasks = User::find($id)->tasks->where('status_id', 2);
-
-        $tasks = TaskResource::collection($user_tasks);
+        $tasks = TaskUserResource::collection($tasks);
 
         $dev = User::where('id', $id)->pluck('name')->first();
 

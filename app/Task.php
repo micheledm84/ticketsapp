@@ -29,4 +29,9 @@ class Task extends Model
     {
         return $this->belongsTo('App\Status');
     }
+
+    public function commits()
+    {
+        return $this->hasMany('App\Commit');
+    }
 }

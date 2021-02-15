@@ -20,17 +20,12 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('reporter-tickets', require('./components/ReporterTickets.vue').default);
-Vue.component('assign-task', require('./components/AssignTask.vue').default);
 Vue.component('remove-task', require('./components/RemoveTask.vue').default);
-Vue.component('show-tasks', require('./components/ShowTasks.vue').default);
-Vue.component('show-projects', require('./components/ShowProjects.vue').default);
 Vue.component('show-pm', require('./components/ShowPM.vue').default);
 Vue.component('button-tickets', require('./components/ButtonTickets.vue').default);
 Vue.component('allocate-task', require('./components/AllocateTask.vue').default);
 Vue.component('validated-errors', require('./components/ValidatedErrors.vue').default);
 Vue.component('success-alert', require('./components/SuccessAlert.vue').default);
-Vue.component('the-reporter-tickets', require('./components/TheReporterTickets.vue').default);
 Vue.component('title-form', require('./components/TitleForm.vue').default);
 Vue.component('in-progress-table', require('./components/InProgressTable.vue').default);
 Vue.component('cross-team-table', require('./components/CrossTeamTable.vue').default);

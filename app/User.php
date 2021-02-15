@@ -61,8 +61,23 @@ class User extends Authenticatable
         return $this->hasMany('App\Project');
     }
 
+    public function commits()
+    {
+        return $this->hasMany('App\Commit');
+    }
+
     public function team()
     {
         return $this->belongsTo('App\Team');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
+    public function badge()
+    {
+        return $this->belongsTo('App\Badge');
     }
 }

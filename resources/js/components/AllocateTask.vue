@@ -79,13 +79,16 @@
                 this.form.user_id = this.dev.id;
                 axios.post('/ticketsapp/public/api/store_task_user', this.form)
                 .then((response) => {
-                    this.errors = response.data;
-                    if (Object.keys(this.errors).length === 0) {
+                    if (typeof response.data === "string") {
+                        this.errors = {};
                         this.displayResults(true, false);
                         this.removeEntry();
                         this.user.tasks = 0;
+                        
                     } else {
-                        this.displayResults(false, true);
+                        this.errors = response.data;
+                        this.displayErrors = true;
+                        this.displayResults(false, true)
                     }
                 })
                 .catch(error => {

@@ -23,16 +23,12 @@ class TaskUserController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return response($validator->errors()); //problem ('Hello World', 200)
+            return response($validator->errors()); 
         } 
 
         $task_user_id = $request->id;
 
         $user_id = TaskUser::where('id', $task_user_id)->pluck('user_id')->first();
-
-        //TaskUser::find($task_user_id)->delete();
-
-        $tasks_user = TaskUser::with(['user', 'task'])->get();
 
         $tasks_user = TaskUser::where('user_id', $user_id)->get();
 
@@ -44,6 +40,7 @@ class TaskUserController extends Controller
     }
 
     public function store(Request $request) {
+
         $validator = Validator::make($request->all(), [
             'user_id' => ['required', new AlreadyAssignedTask($request->task_id, $request->user_id)],
             'task_id' => 'required'
@@ -57,29 +54,27 @@ class TaskUserController extends Controller
         $task_user->task_id = $request->task_id;
         $task_user->user_id = $request->user_id;
         $task_user->save();
+
+        $message = "The task has been assigned";
+
+        return response($message);
     }
 
     public function remove(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'id' => 'required|exists:task_user,id'
+            'task_id' => 'required|exists:tasks,id',
+            'user_id' => 'required|exists:users,id'
         ]);
         
         if ($validator->fails()) {
-            return response($validator->errors()); //problem ('Hello World', 200)
+            return response($validator->errors()); 
         } 
 
-        $task_user_id = $request->id;
+        $task_id = $request->task_id;
+        $user_id = $request->user_id;
 
-        //$user_id = TaskUser::where('id', $task_user_id)->pluck('user_id')->first();
-
-        TaskUser::find($task_user_id)->delete();
-
-        /*$tasks_user = TaskUser::with(['user', 'task'])->get();
-
-        $tasks_user = TaskUser::where('user_id', $user_id)->get();
-
-        $tasks_user = TaskUserResource::collection($tasks_user);*/
+        TaskUser::where('task_id', $task_id)->where('user_id', $user_id)->delete();
 
         $message = "The resource has been deleted";
 

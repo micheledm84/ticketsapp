@@ -81,13 +81,13 @@ class TaskUserSeeder extends Seeder
             ],
             [
                 'task_id' => 8,
-                'user_id' => 10,
+                'user_id' => 11,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'task_id' => 9,
-                'user_id' => 10,
+                'user_id' => 11,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
@@ -111,7 +111,7 @@ class TaskUserSeeder extends Seeder
             ],
             [
                 'task_id' => 12,
-                'user_id' => 7,
+                'user_id' => 6,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
@@ -123,7 +123,19 @@ class TaskUserSeeder extends Seeder
             ],
             [
                 'task_id' => 14,
-                'user_id' => 7,
+                'user_id' => 3,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'task_id' => 3,
+                'user_id' => 4,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'task_id' => 5,
+                'user_id' => 10,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

@@ -9,7 +9,7 @@
             <label for="tasks">Tasks:</label>
             <select required v-model="user.tasks" class="form-control" id="tasks" @mouseover="displayResults(false, false)">
                 <option v-for="task in tasks_user" :value="task.id" :key="task.id">
-                    {{ task.task_name }} - {{ task.task_description }}
+                    {{ task.name }} - {{ task.description }}
                 </option>
             </select>
         </div>
@@ -37,12 +37,13 @@
         },
         mounted() {
             console.log('Component mounted.');
+            console.log(this.dev.name);
         },
         props: {
             dev: {
-                type: String,
+                type: Object,
                 required: true,
-                default: () => '',
+                default: () => {},
             },
             tasks_user: {
                 type: Array,
@@ -52,7 +53,7 @@
         },
         computed: {
             titleForm: function () {
-                return "Remove a task from " + this.dev;
+                return "Remove a task from " + this.dev.name;
             }
         },
         data: function() {
@@ -70,7 +71,7 @@
         },
         methods: {
             removeTask: function() {
-                axios.delete('/ticketsapp/public/api/remove_task_user?id=' + this.user.tasks)
+                axios.delete('/ticketsapp/public/api/remove_task_user?task_id=' + this.user.tasks + '&user_id=' + this.dev.id)
                 .then((response) => {
                     if (typeof response.data === "string") {
                         this.errors = {};

@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\User;
 
+//use App\Http\Resources\CommitResource;
+
 class UserResource extends JsonResource
 {
     /**
@@ -19,9 +21,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'role_id' => $this->role_id,
-            'badge_id' => $this->badge_id,
-            'team_id' => $this->team_id,
+            'role_id' => $this->role->name,
+            'badge_id' => $this->badge->code,
+            'team_id' => $this->team->name,
             'pm_name' => User::where('team_id', $this->team_id)->where('role_id', 2)->pluck('name')->first(),
         ];
     }
